@@ -1,7 +1,11 @@
 import EthClient from "../../classes/EthClient/EthClient";
 import { TransactionResponse } from "../../classes/EthClient/types/transaction";
 import * as Fallback from "../Fallback/Fallback";
-declare var window: any;
+declare global {
+    interface Window {
+        ethereum: any;
+    }
+}
 
 const displayNotice = (notice: HTMLSpanElement, message: string) => {
     notice.style.display = "block";
@@ -103,8 +107,8 @@ const handleTransactionError = (notice: HTMLSpanElement, errorCode: number) => {
     }
 };
 
-const buildComponent = (): HTMLDivElement => {
-    const formContainer: HTMLDivElement = document.createElement("div");
+const buildComponent = (): HTMLElement => {
+    const formContainer: HTMLElement = document.createElement("section");
     formContainer.className = "transaction-form-container";
 
     const formTitle: HTMLHeadingElement = document.createElement("h2");
