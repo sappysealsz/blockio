@@ -35,6 +35,12 @@ const anchorHandler = (account: string, anchor: HTMLAnchorElement): void => {
     });
 };
 
+const accountChangeEvent = (walletAddress: HTMLLIElement) => {
+    window.ethereum.on("accountsChanged", (accounts: Array<string>) => {
+        walletAddress.textContent = accounts[0];
+    });
+};
+
 const buildComponent = async (): Promise<HTMLElement> => {
     const headerContainer: HTMLElement = document.createElement("header");
     headerContainer.className = "header";
@@ -66,6 +72,7 @@ const buildComponent = async (): Promise<HTMLElement> => {
 
         li2.appendChild(a1);
 
+        accountChangeEvent(li1);
         anchorHandler(account, a1);
         ul.append(li1, li2);
     }
@@ -95,4 +102,4 @@ const render = async (): Promise<void> => {
     document.body.prepend(await buildComponent());
 };
 
-render();
+export { render };
