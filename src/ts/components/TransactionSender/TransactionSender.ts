@@ -1,6 +1,7 @@
 import EthClient from "../../web3/EthClient";
 import { TransactionResponse } from "../../web3/types/transaction";
 import * as Fallback from "../Fallback/Fallback";
+declare var window: any;
 
 const displayNotice = (notice: HTMLSpanElement, message: string) => {
     notice.style.display = "block";
@@ -67,7 +68,7 @@ const btnEvent = (
                     `Transaction has been processed.\nTransaction Hash: ${txRes.hash}`
                 );
             } else {
-                handleTransactionError(notice, txRes.error.code);
+                handleTransactionError(notice, txRes.error!.code);
             }
         } catch (err) {
             displayNotice(
