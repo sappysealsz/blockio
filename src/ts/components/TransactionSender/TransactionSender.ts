@@ -1,5 +1,5 @@
-import EthClient from "../../web3/EthClient";
-import { TransactionResponse } from "../../web3/types/transaction";
+import EthClient from "../../classes/EthClient/EthClient";
+import { TransactionResponse } from "../../classes/EthClient/types/transaction";
 import * as Fallback from "../Fallback/Fallback";
 declare var window: any;
 
