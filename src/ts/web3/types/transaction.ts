@@ -1,5 +1,8 @@
 export type TransactionResponse = {
     hash?: string;
-    error?: number;
+    error?: {
+        code: number;
+        message: string;
+    };
     status: boolean;
 };
