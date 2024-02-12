@@ -1,4 +1,5 @@
 import EthClient from "../../classes/EthClient/EthClient";
+declare var window: any;
 
 const displayNotice = (notice: HTMLSpanElement, message: string) => {
     notice.style.display = "block";
