@@ -1,6 +1,9 @@
 import EthClient from "../../classes/EthClient/EthClient";
-declare var window: any;
-
+declare global {
+    interface Window {
+        ethereum: any;
+    }
+}
 const displayNotice = (notice: HTMLSpanElement, message: string) => {
     notice.style.display = "block";
     notice.textContent = message;
@@ -54,8 +57,8 @@ const btnEvent = (
     });
 };
 
-const buildComponent = (): HTMLDivElement => {
-    const formContainer: HTMLDivElement = document.createElement("div");
+const buildComponent = (): HTMLElement => {
+    const formContainer: HTMLElement = document.createElement("section");
     formContainer.className = "balance-form-container";
 
     const formTitle: HTMLHeadingElement = document.createElement("h2");
