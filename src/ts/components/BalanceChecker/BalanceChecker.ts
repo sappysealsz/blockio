@@ -1,4 +1,4 @@
-import EthClient from "../../web3/EthClient";
+import EthClient from "../../classes/EthClient/EthClient";
 
 const displayNotice = (notice: HTMLSpanElement, message: string) => {
     notice.style.display = "block";
