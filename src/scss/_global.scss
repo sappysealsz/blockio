@@ -1,0 +1,158 @@
+/* GLOBAL VARIABLES */
+/* Fonts */
+$default-font: "Poppins", sans-serif;
+$secondary-font: "Playfair Display", serif;
+
+/* Website Color Palette */
+$bg-color: #23262f;
+$mainColor: #90f996; // Main color (lime green)
+$accentColor1: #2e5b36; // Deep green for contrast
+$accentColor2: #f9c342; // Yellow for a vibrant touch
+$neutralColor1: #38444d; // Charcoal gray for balance
+$neutralColor2: #b5b5b5; // Light gray for backgrounds
+$highlightColor: #ff6f61; // Coral for attention-grabbing elements
+
+/* Font sizes */
+$xl: 3.5rem;
+$l: 2.5rem;
+$m: 1.5rem;
+$s: 1rem;
+
+/** SCREEN MIXINS **/
+@mixin small-screen {
+    // Ideal for phones + tabs
+    @media screen and (max-width: 767px) {
+        @content;
+    }
+}
+
+@mixin medium-screen {
+    // Ideal for laptops (13 inches to 17 inches)
+    @media screen and (min-width: 768px) and (max-width: 1366px) {
+        @content;
+    }
+}
+
+@mixin large-screen {
+    // Ideal for monitors (20 inches+)
+    @media screen and (min-width: 1367px) {
+        @content;
+    }
+}
+
+@mixin medium-to-large-screen {
+    // Ideal for screens (13 inches+)
+    @media screen and (min-width: 768px) {
+        @content;
+    }
+}
+
+/* ------------------------------ */
+
+/* SIMPLE CSS RESET */
+/* Box-sizing border-box for all elements */
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+/* Remove margin and padding from all elements */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+dl,
+dd,
+dt,
+figure,
+figcaption,
+blockquote,
+pre {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set default font size and line height */
+body {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+    font-family: $default-font;
+    background-color: $bg-color;
+
+    @include medium-screen {
+        margin: 2rem 4rem 0 4rem;
+        min-height: calc(100vh - 2rem);
+    }
+    @include large-screen {
+        margin: 2rem 20rem 0 20rem;
+        min-height: calc(100vh - 2rem);
+    }
+    @include small-screen {
+        margin: 1.5rem 1.5rem 0 1.5rem;
+        min-height: calc(100vh - 1.5rem);
+    }
+}
+
+/* Remove list styles (bullet points and numbers) */
+ul,
+ol {
+    list-style: none;
+}
+
+/* Remove default styles for anchor links */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Remove default styles for form elements */
+button,
+input,
+select,
+textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+/* Remove default styles for images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Remove default styles for tables */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    @include medium-to-large-screen {
+        margin-top: 2.5rem;
+        margin-bottom: 5.5rem;
+        gap: 3rem;
+    }
+    @include small-screen {
+        margin-top: 1.5rem;
+        margin-bottom: 3.5rem;
+        gap: 2rem;
+    }
+}
