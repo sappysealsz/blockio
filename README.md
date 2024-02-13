@@ -15,10 +15,10 @@ Blockio is a basic web application developed using Web3.js and the Browser Injec
 ## 🌟 Features
 - **Get Current Block**
 Quickly retrieve the number of the latest block in the blockchain.
-<br>
+<br />
 - **Check Balance**
 Check the balance of any Ethereum account with ease. Simply input the account address, and Blockio will fetch and display the current balance.
-<br>
+<br />
 - **Transfer Funds**
 Initiate secure fund transfers between Ethereum accounts. Blockio streamlines the process of sending funds, allowing users to specify the recipient's address and the amount to be transferred.
 
