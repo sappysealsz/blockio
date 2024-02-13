@@ -6,7 +6,7 @@ declare global {
     }
 }
 const displayNotice = (notice: HTMLSpanElement, message: string) => {
-    notice.style.display = "block";
+    notice.style.display = message ? "block" : "none";
     notice.textContent = message;
 };
 
