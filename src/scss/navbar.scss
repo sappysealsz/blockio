@@ -1,0 +1,108 @@
+@use "./global";
+
+.header {
+    @include global.medium-to-large-screen {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        align-items: center;
+    }
+
+    position: relative;
+    background: linear-gradient(
+        181deg,
+        rgba(255, 255, 255, 0.233),
+        rgba(255, 255, 255, 0.1098039216)
+    );
+    padding: 20px 30px;
+    border-radius: 25px;
+    box-shadow: 1px 2px 0px 2px rgba(0, 0, 0, 0.2);
+
+    > .logo {
+        width: 230px;
+        height: auto;
+    }
+
+    nav {
+        justify-self: end;
+
+        @include global.small-screen {
+            margin-top: 8%;
+        }
+    }
+
+    nav > ul {
+        @include global.medium-to-large-screen {
+            display: flex;
+            gap: 5%;
+        }
+
+        @include global.small-screen {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        > li {
+            border-radius: 10px;
+            box-shadow: 1px 2px 0px 2px rgba(0, 0, 0, 0.2);
+
+            &:first-child {
+                max-width: 22ch;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                background-color: #ffffff3a;
+                padding: 2%;
+                color: #fff;
+                font-weight: 500;
+            }
+
+            &:last-child {
+                color: global.$neutralColor1;
+                min-width: max-content;
+                background-color: #74ff7ec4;
+                padding: 2%;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+@include global.small-screen {
+    details {
+        summary {
+            display: grid;
+            position: relative;
+            grid-template-columns: 4fr 1fr;
+            align-items: center;
+            list-style: none;
+        }
+
+        summary > .logo {
+            width: 190px;
+            height: auto;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: url("/menu.svg");
+            position: absolute;
+            font-size: global.$m;
+            justify-self: end;
+            top: 7px;
+        }
+    }
+
+    details[open] {
+        summary::after {
+            content: url("/close.svg");
+            font-size: global.$m;
+            justify-self: end;
+        }
+    }
+}
