@@ -1,0 +1,47 @@
+@use "./global";
+
+.nowallet-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(
+        175deg,
+        rgba(255, 255, 255, 0.131),
+        rgba(255, 255, 255, 0.036)
+    );
+    padding: 20px 30px;
+    border-radius: 25px;
+    box-shadow: 1px 2px 0px 2px rgba(0, 0, 0, 0.2);
+    min-height: 43vh;
+    gap: 2rem;
+
+    .nowallet-title {
+        font-family: global.$secondary-font;
+        font-size: global.$l;
+        background-color: #ffffff1f;
+        padding: 10px;
+        border-radius: 10px;
+        color: #fff;
+        letter-spacing: 1px;
+        font-weight: 400;
+        text-transform: uppercase;
+    }
+
+    .nowallet-subtitle {
+        color: #fff;
+        max-width: 40ch;
+        text-align: center;
+        font-size: global.$m;
+    }
+
+    .no-wallet-link {
+        background-color: global.$accentColor2;
+        box-shadow: 1px 2px 0px 2px rgba(0, 0, 0, 0.2);
+        padding: 15px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: global.$m;
+        color: #333;
+    }
+}
