@@ -31,6 +31,7 @@ const buildComponent = (root: HTMLElement): void => {
 
         noWalletCont.append(title, subTitle, anchor);
         root.appendChild(noWalletCont);
+        document.body.dataset.wallet = "disabled";
     } else {
         const balanceChecker: HTMLElement = BalanceChecker.buildComponent();
         const transactionSender: HTMLElement =
