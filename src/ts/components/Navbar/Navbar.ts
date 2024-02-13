@@ -1,5 +1,7 @@
 import logoWhite from "./logoWhite.svg";
 import EthClient from "../../classes/EthClient/EthClient";
+import "../../../scss/navbar.scss";
+
 declare global {
     interface Window {
         ethereum: any;

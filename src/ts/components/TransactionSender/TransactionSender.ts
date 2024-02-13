@@ -1,6 +1,8 @@
 import EthClient from "../../classes/EthClient/EthClient";
 import { TransactionResponse } from "../../classes/EthClient/types/transaction";
 import * as Fallback from "../Fallback/Fallback";
+import "../../../scss/transfer.scss";
+
 declare global {
     interface Window {
         ethereum: any;

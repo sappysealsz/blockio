@@ -1,4 +1,5 @@
 import EthClient from "../../classes/EthClient/EthClient";
+import "../../../scss/balance.scss";
 declare global {
     interface Window {
         ethereum: any;

@@ -1,0 +1,108 @@
+@use "./global";
+
+.transaction-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 2rem;
+    width: 100%;
+    padding: 40px;
+    border-radius: 15px;
+    color: #fff;
+    background: linear-gradient(
+        175deg,
+        rgba(255, 255, 255, 0.131),
+        rgba(255, 255, 255, 0.036)
+    );
+    box-shadow: 1px 2px 0px 2px rgba(0, 0, 0, 0.2);
+
+    @include global.small-screen {
+        align-items: stretch;
+    }
+
+    > .transaction-form-notice {
+        padding: 5px 15px;
+        border-radius: 5px;
+        background-color: global.$neutralColor1;
+        font-size: global.$m;
+        font-weight: 600;
+        white-space: break-spaces;
+    }
+
+    > h2 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: calc(global.$l - 0.2rem);
+        font-family: global.$secondary-font;
+        font-weight: 300;
+        text-decoration: underline 8px #a8ffac93;
+        border-radius: 10px;
+    }
+
+    > form > fieldset {
+        display: flex;
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+        border: none;
+
+        @include global.small-screen {
+            flex-direction: column;
+        }
+
+        > input {
+            box-sizing: border-box;
+            height: 60px;
+            width: 100%;
+            padding: 0 2%;
+            border: 0;
+            border-radius: 10px;
+            font-size: global.$m;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.131),
+                rgba(255, 255, 255, 0.036)
+            );
+            box-shadow: 1px 2px 0px 2px rgba(0, 0, 0, 0.2);
+
+            @include global.medium-to-large-screen {
+                &:last-child {
+                    width: 40%;
+                }
+            }
+
+            @include global.small-screen {
+                padding: 0 5%;
+            }
+
+            &::placeholder {
+                color: #acacac;
+                font-weight: 500;
+            }
+        }
+    }
+
+    > button {
+        padding: 1% 5%;
+        border: 0;
+        border-radius: 10px;
+        font-size: calc(global.$m + 0.1rem);
+        font-weight: 600;
+        color: #222;
+        background-color: global.$mainColor;
+        box-shadow: 1px 2px 0px 2px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+
+        &[disabled] {
+            background-color: #acacac;
+            cursor: not-allowed;
+        }
+
+        &:not([disabled]):hover {
+            background-color: #90f995b8;
+        }
+    }
+}
