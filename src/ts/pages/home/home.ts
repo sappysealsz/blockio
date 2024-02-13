@@ -1,6 +1,7 @@
 import * as BalanceChecker from "../../components/BalanceChecker/BalanceChecker";
 import * as TransactionSender from "../../components/TransactionSender/TransactionSender";
 import * as Navbar from "../../components/Navbar/Navbar";
+import "../../../scss/nowallet.scss";
 
 const chainChangeEvent = () => {
     window.ethereum.on("chainChanged", () => {
