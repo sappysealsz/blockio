@@ -50,7 +50,7 @@ const btnEvent = (
             const balance: number = await getBalance(inputVal, account);
             displayNotice(
                 notice,
-                `${balance} ${localStorage.getItem("blockioCurrnecy")}`
+                `${balance} ${localStorage.getItem("blockioCurrency")}`
             );
         } catch (err) {
             displayNotice(
