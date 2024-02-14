@@ -30,8 +30,11 @@
         text-decoration-color: #f9c242c5;
         text-underline-offset: 8px;
         text-decoration-thickness: 8px;
+
         @include global.small-screen {
             font-size: calc(global.$l - 0.7rem);
+            text-decoration-thickness: 6px;
+            text-underline-offset: 6px;
         }
     }
 
