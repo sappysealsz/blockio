@@ -28,7 +28,7 @@
     }
 
     nav {
-        justify-self: end;
+        width: 100%;
 
         @include global.small-screen {
             margin-top: 8%;
@@ -36,9 +36,13 @@
     }
 
     nav > ul {
+        display: flex;
+        justify-content: end;
+        width: 100%;
+
         @include global.medium-to-large-screen {
             display: flex;
-            gap: 5%;
+            gap: 3%;
         }
 
         @include global.small-screen {
@@ -52,12 +56,15 @@
         > li {
             border-radius: 10px;
             background-color: #ffffff3a;
-            padding: 2%;
+            padding: 1%;
             color: #fff;
             font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
             &:first-child {
-                max-width: 25ch;
+                max-width: 22ch;
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
@@ -67,7 +74,7 @@
                 color: #333;
                 min-width: max-content;
                 background-color: #74ff7ec4;
-                padding: 2%;
+                padding: 1%;
                 font-weight: 600;
                 box-shadow: 1px 2px 0px 2px rgba(0, 0, 0, 0.2);
             }
