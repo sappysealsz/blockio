@@ -1,6 +1,7 @@
 import logoWhite from "./logoWhite.svg";
 import EthClient from "../../classes/EthClient/EthClient";
 import "../../../scss/navbar.scss";
+import { Network } from "../../classes/EthClient/types/chains";
 
 declare global {
     interface Window {
@@ -10,6 +11,14 @@ declare global {
 const fetchCurrentBlock = async (account: string): Promise<number> => {
     const agent: EthClient = new EthClient(window.ethereum, account);
     return await agent.block();
+};
+
+const saveCurrentNet = async (id: number, account: string): Promise<void> => {
+    const agent: EthClient = new EthClient(window.ethereum, account);
+    const networkData: Network = await agent.network(id);
+
+    localStorage.setItem("blockioNetwork", networkData.name);
+    localStorage.setItem("blockioCurrnecy", networkData.currency);
 };
 
 const resetAnchorText = (
@@ -69,21 +78,25 @@ const buildComponent = async (): Promise<HTMLElement> => {
                 method: "eth_requestAccounts",
             })
         )[0];
+        await saveCurrentNet(window.ethereum.networkVersion, account);
 
         const li1: HTMLLIElement = document.createElement("li");
         li1.textContent = account;
 
-        // Current Block Anchor
         const li2: HTMLLIElement = document.createElement("li");
+        li2.textContent = localStorage.getItem("blockioNetwork");
+
+        // Current Block Anchor
+        const li3: HTMLLIElement = document.createElement("li");
         const a1: HTMLAnchorElement = document.createElement("a");
         a1.href = "#";
         a1.textContent = "What's the current block?";
 
-        li2.appendChild(a1);
+        li3.appendChild(a1);
 
         accountChangeEvent(li1);
         anchorHandler(account, a1);
-        ul.append(li1, li2);
+        ul.append(li1, li2, li3);
     }
 
     navbar.append(ul);
