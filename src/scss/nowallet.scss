@@ -20,14 +20,13 @@
     .nowallet-title {
         font-family: global.$secondary-font;
         font-size: global.$l;
-        background-color: #ffffff1f;
         padding: 10px;
         border-radius: 10px;
         color: #fff;
         letter-spacing: 1px;
         font-weight: 400;
         text-transform: uppercase;
-
+        text-decoration: underline 8px #f9c242c5;
         @include global.small-screen {
             font-size: calc(global.$l - 0.7rem);
         }
