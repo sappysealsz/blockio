@@ -8,7 +8,7 @@
         rgba(255, 255, 255, 0.036)
     );
     padding: 40px;
-    border-radius: 15px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -21,11 +21,21 @@
     }
 
     > .balance-form-notice {
-        background-color: global.$neutralColor1;
+        background-color: #157170;
         padding: 5px 15px;
-        border-radius: 5px;
+        border-radius: 8px;
         font-size: global.$m;
         font-weight: 600;
+        overflow-wrap: break-word;
+        max-width: 48ch;
+
+        @include global.medium-screen {
+            font-size: calc(global.$s + 0.1rem);
+        }
+
+        @include global.small-screen {
+            font-size: global.$s;
+        }
     }
 
     > h2 {
@@ -33,9 +43,15 @@
         border-radius: 10px;
         font-family: global.$secondary-font;
         font-weight: 300;
-        text-decoration: underline;
-        text-decoration-thickness: 8px;
-        text-decoration-color: #a8ffac93;
+        text-decoration: underline 8px #82ff8894;
+
+        @include global.medium-screen {
+            font-size: calc(global.$l - 0.4rem);
+        }
+
+        @include global.small-screen {
+            font-size: calc(global.$l - 0.7rem);
+        }
     }
 
     > form > fieldset {
@@ -60,6 +76,16 @@
             box-shadow: 1px 2px 0px 2px rgba(0, 0, 0, 0.2);
             font-weight: 600;
 
+            @include global.medium-screen {
+                height: 50px;
+                font-size: global.$s;
+            }
+
+            @include global.small-screen {
+                height: 50px;
+                font-size: global.$s;
+            }
+
             &::placeholder {
                 color: #acacac;
                 font-weight: 500;
@@ -77,6 +103,10 @@
         box-shadow: 1px 2px 0px 2px rgba(0, 0, 0, 0.2);
         padding: 1% 5%;
         cursor: pointer;
+
+        @include global.medium-screen {
+            font-size: global.$m;
+        }
 
         &[disabled] {
             background-color: #acacac;

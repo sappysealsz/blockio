@@ -20,6 +20,10 @@
     > .logo {
         width: 230px;
         height: auto;
+
+        @include global.medium-screen {
+            width: 180px;
+        }
     }
 
     nav {
