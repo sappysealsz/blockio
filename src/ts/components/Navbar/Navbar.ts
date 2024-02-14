@@ -18,7 +18,7 @@ const saveCurrentNet = async (id: number, account: string): Promise<void> => {
     const networkData: Network = await agent.network(id);
 
     localStorage.setItem("blockioNetwork", networkData.name);
-    localStorage.setItem("blockioCurrnecy", networkData.currency);
+    localStorage.setItem("blockioCurrency", networkData.currency);
 };
 
 const resetAnchorText = (
