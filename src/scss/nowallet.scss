@@ -26,7 +26,10 @@
         letter-spacing: 1px;
         font-weight: 400;
         text-transform: uppercase;
-        text-decoration: underline 8px #f9c242c5;
+        text-decoration: underline;
+        text-decoration-color: #f9c242c5;
+        text-underline-offset: 8px;
+        text-decoration-thickness: 8px;
         @include global.small-screen {
             font-size: calc(global.$l - 0.7rem);
         }
