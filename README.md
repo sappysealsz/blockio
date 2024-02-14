@@ -1,4 +1,4 @@
-# ❒ Blockio
+# <img src = "public/favicon.png" width = 25px> Blockio
 
 ## 👋 Overview
 Blockio is a basic web application developed using Web3.js and the Browser Injected API (wallet-injected API). It is crafted to enable smooth interaction with Ethereum Virtual Machine (EVM) blockchains. Whether you're a developer, researcher, or blockchain enthusiast, Blockio offers a user-friendly interface for executing key operations on EVM blockchains.
