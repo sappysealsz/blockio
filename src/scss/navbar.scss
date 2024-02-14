@@ -20,6 +20,7 @@
     > .logo {
         width: 230px;
         height: auto;
+        cursor: pointer;
 
         @include global.medium-screen {
             width: 180px;
