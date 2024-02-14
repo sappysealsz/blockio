@@ -1,6 +1,7 @@
 import Web3 from "web3";
 import { TransactionResponse } from "./types/transaction";
 import { EtherUnit } from "./types/unit";
+import { Chain } from "./types/chains";
 
 class EthClient {
     private provider: Web3;
@@ -45,6 +46,28 @@ class EthClient {
             };
         } catch (err: any) {
             return { error: err.innerError, status: false };
+        }
+    }
+
+    async network(id: number): Promise<Object> {
+        try {
+            const chains: Chain[] = await (
+                await fetch("https://chainid.network/chains.json")
+            ).json();
+            const networkData: Chain = chains.find(
+                (chain: Chain) => chain.chainId == id
+            )!;
+
+            return {
+                name: networkData.name,
+                currency: networkData.nativeCurrency.symbol,
+            };
+        } catch (err: any) {
+            console.error("Error fetching current network data");
+            return {
+                name: "Unknown",
+                currency: "ETH",
+            };
         }
     }
 }
