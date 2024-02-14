@@ -15,19 +15,19 @@ const buildComponent = (root: HTMLElement): void => {
         noWalletCont.className = "nowallet-container";
 
         const title: HTMLHeadElement = document.createElement("h1");
-        title.textContent = "Hang tight!";
+        title.textContent = "Hold on!";
         title.className = "nowallet-title";
 
         const subTitle: HTMLHeadElement = document.createElement("h3");
         subTitle.textContent =
-            "Before moving forward, make sure to install and set up a wallet extension in your browser.";
+            "Install and set up a browser wallet extension. Blockio recommends using MetaMask.";
         subTitle.className = "nowallet-subtitle";
 
         const anchor: HTMLAnchorElement = document.createElement("a");
         anchor.className = "no-wallet-link";
         anchor.href = "https://metamask.io/download/";
         anchor.target = "_blank";
-        anchor.textContent = "Download MetaMask";
+        anchor.textContent = "Install MetaMask";
 
         noWalletCont.append(title, subTitle, anchor);
         root.appendChild(noWalletCont);
