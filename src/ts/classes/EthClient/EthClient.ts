@@ -1,7 +1,7 @@
 import Web3 from "web3";
 import { TransactionResponse } from "./types/transaction";
 import { EtherUnit } from "./types/unit";
-import { Chain } from "./types/chains";
+import { Chain, Network } from "./types/chains";
 
 class EthClient {
     private provider: Web3;
@@ -49,7 +49,7 @@ class EthClient {
         }
     }
 
-    async network(id: number): Promise<Object> {
+    async network(id: number): Promise<Network> {
         try {
             const chains: Chain[] = await (
                 await fetch("https://chainid.network/chains.json")

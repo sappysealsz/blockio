@@ -20,3 +20,8 @@ export type Chain = {
     };
     explorers: Object[];
 };
+
+export type Network = {
+    name: string;
+    currency: string;
+};
