@@ -51,16 +51,16 @@
 
         > li {
             border-radius: 10px;
+            background-color: #ffffff3a;
+            padding: 2%;
+            color: #fff;
+            font-weight: 500;
 
             &:first-child {
-                max-width: 22ch;
+                max-width: 25ch;
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
-                background-color: #ffffff3a;
-                padding: 2%;
-                color: #fff;
-                font-weight: 500;
             }
 
             &:last-child {
