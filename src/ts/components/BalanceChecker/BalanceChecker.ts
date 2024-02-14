@@ -48,7 +48,10 @@ const btnEvent = (
                 })
             )[0];
             const balance: number = await getBalance(inputVal, account);
-            displayNotice(notice, `${balance} ETH`);
+            displayNotice(
+                notice,
+                `${balance} ${localStorage.getItem("blockioCurrnecy")}`
+            );
         } catch (err) {
             displayNotice(
                 notice,
