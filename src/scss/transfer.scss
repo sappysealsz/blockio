@@ -7,7 +7,7 @@
     gap: 2rem;
     width: 100%;
     padding: 40px;
-    border-radius: 15px;
+    border-radius: 20px;
     color: #fff;
     background: linear-gradient(
         175deg,
@@ -22,11 +22,20 @@
 
     > .transaction-form-notice {
         padding: 5px 15px;
-        border-radius: 5px;
-        background-color: global.$neutralColor1;
+        border-radius: 8px;
+        background-color: #157170;
         font-size: global.$m;
         font-weight: 600;
-        white-space: break-spaces;
+        overflow-wrap: break-word;
+        max-width: 48ch;
+
+        @include global.medium-screen {
+            font-size: calc(global.$s + 0.1rem);
+        }
+
+        @include global.small-screen {
+            font-size: global.$s;
+        }
     }
 
     > h2 {
@@ -36,8 +45,16 @@
         font-size: calc(global.$l - 0.2rem);
         font-family: global.$secondary-font;
         font-weight: 300;
-        text-decoration: underline 8px #a8ffac93;
+        text-decoration: underline 8px #82ff8894;
         border-radius: 10px;
+
+        @include global.medium-screen {
+            font-size: calc(global.$l - 0.4rem);
+        }
+
+        @include global.small-screen {
+            font-size: calc(global.$l - 0.7rem);
+        }
     }
 
     > form > fieldset {
@@ -70,8 +87,18 @@
 
             @include global.medium-to-large-screen {
                 &:last-child {
-                    width: 40%;
+                    width: 16ch;
                 }
+            }
+
+            @include global.medium-screen {
+                height: 50px;
+                font-size: global.$s;
+            }
+
+            @include global.small-screen {
+                height: 50px;
+                font-size: global.$s;
             }
 
             @include global.small-screen {
@@ -95,6 +122,10 @@
         background-color: global.$mainColor;
         box-shadow: 1px 2px 0px 2px rgba(0, 0, 0, 0.2);
         cursor: pointer;
+
+        @include global.medium-screen {
+            font-size: global.$m;
+        }
 
         &[disabled] {
             background-color: #acacac;

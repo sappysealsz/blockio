@@ -27,6 +27,10 @@
         letter-spacing: 1px;
         font-weight: 400;
         text-transform: uppercase;
+
+        @include global.small-screen {
+            font-size: calc(global.$l - 0.7rem);
+        }
     }
 
     .nowallet-subtitle {
