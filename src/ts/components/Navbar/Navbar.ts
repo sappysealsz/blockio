@@ -37,9 +37,15 @@ const anchorHandler = (account: string, anchor: HTMLAnchorElement): void => {
     });
 };
 
-const accountChangeEvent = (walletAddress: HTMLLIElement) => {
+const accountChangeEvent = (walletAddress: HTMLLIElement): void => {
     window.ethereum.on("accountsChanged", (accounts: Array<string>) => {
         walletAddress.textContent = accounts[0];
+    });
+};
+
+const homeLogoEvent = (logo: HTMLImageElement): void => {
+    logo.addEventListener("click", () => {
+        window.location.reload();
     });
 };
 
@@ -52,6 +58,7 @@ const buildComponent = async (): Promise<HTMLElement> => {
     logo.alt = "Blockio Logo Image";
     logo.className = "logo";
     [logo.width, logo.height] = [300, 80];
+    homeLogoEvent(logo);
 
     const navbar: HTMLElement = document.createElement("nav");
     const ul: HTMLUListElement = document.createElement("ul");
