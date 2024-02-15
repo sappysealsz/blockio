@@ -66,7 +66,7 @@ const buildComponent = (): HTMLElement => {
     formContainer.className = "balance-form-container";
 
     const formTitle: HTMLHeadingElement = document.createElement("h2");
-    formTitle.textContent = "Balance Checker";
+    formTitle.textContent = "Balance Tracker";
 
     const formNotice: HTMLSpanElement = document.createElement("span");
     formNotice.className = "balance-form-notice";
