@@ -13,9 +13,16 @@ const fetchCurrentBlock = async (account: string): Promise<number> => {
     return await agent.block();
 };
 
-const saveCurrentNet = async (id: number, account: string): Promise<void> => {
+const storeNetwork = async (account: string): Promise<void> => {
+    async function getChainID(): Promise<number> {
+        const chainID: number = await window.ethereum.request({
+            method: "net_version",
+        });
+        return chainID;
+    }
+
     const agent: EthClient = new EthClient(window.ethereum, account);
-    const networkData: Network = await agent.network(id);
+    const networkData: Network = await agent.network(await getChainID());
 
     localStorage.setItem("blockioNetwork", networkData.name);
     localStorage.setItem("blockioCurrency", networkData.currency);
@@ -78,7 +85,7 @@ const buildComponent = async (): Promise<HTMLElement> => {
                 method: "eth_requestAccounts",
             })
         )[0];
-        await saveCurrentNet(window.ethereum.networkVersion, account);
+        await storeNetwork(account);
 
         const li1: HTMLLIElement = document.createElement("li");
         li1.textContent = account;
