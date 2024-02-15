@@ -30,9 +30,7 @@ const addressInputEvent = (
     form: HTMLFormElement
 ) => {
     input.addEventListener("input", () => {
-        const wAddressRegex: RegExp = /^0x/;
-
-        if (wAddressRegex.test(input.value.trim())) {
+        if (input.checkValidity()) {
             if (form.checkValidity()) btn.disabled = false;
             displayNotice(notice, "");
         } else {
@@ -145,6 +143,7 @@ const buildComponent = (): HTMLElement => {
     wAddressInput.type = "text";
     wAddressInput.placeholder = "Enter recipient wallet address";
     wAddressInput.className = "toaddress-input";
+    wAddressInput.pattern = "^0x.*";
     wAddressInput.required = true;
 
     const amountInput: HTMLInputElement = document.createElement("input");
