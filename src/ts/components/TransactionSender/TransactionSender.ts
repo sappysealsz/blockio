@@ -23,20 +23,38 @@ const initTransaction = async (
     return await agent.send(addressVal, amountVal);
 };
 
-const wInputEvent = (
+const addressInputEvent = (
     input: HTMLInputElement,
     btn: HTMLButtonElement,
-    notice: HTMLSpanElement
+    notice: HTMLSpanElement,
+    form: HTMLFormElement
 ) => {
     input.addEventListener("input", () => {
-        const wAddressRegex = /^0x/;
+        const wAddressRegex: RegExp = /^0x/;
 
         if (wAddressRegex.test(input.value.trim())) {
-            btn.disabled = false;
+            if (form.checkValidity()) btn.disabled = false;
             displayNotice(notice, "");
         } else {
             btn.disabled = true;
             displayNotice(notice, "Ensure the wallet address is valid");
+        }
+    });
+};
+
+const amountInputEvent = (
+    input: HTMLInputElement,
+    btn: HTMLButtonElement,
+    notice: HTMLSpanElement,
+    form: HTMLFormElement
+) => {
+    input.addEventListener("input", () => {
+        if (Number(input.value.trim()) > 0) {
+            if (form.checkValidity()) btn.disabled = false;
+            displayNotice(notice, "");
+        } else {
+            btn.disabled = true;
+            displayNotice(notice, "Ensure the amount is valid");
         }
     });
 };
@@ -127,17 +145,21 @@ const buildComponent = (): HTMLElement => {
     wAddressInput.type = "text";
     wAddressInput.placeholder = "Enter recipient wallet address";
     wAddressInput.className = "toaddress-input";
+    wAddressInput.required = true;
 
     const amountInput: HTMLInputElement = document.createElement("input");
     amountInput.type = "number";
     amountInput.placeholder = `Amount in ${localStorage.getItem("blockioCurrency")}`;
     amountInput.className = "amount-input";
+    amountInput.step = "any";
+    amountInput.required = true;
 
     const submitBtn: HTMLButtonElement = document.createElement("button");
     submitBtn.textContent = "Send";
     submitBtn.disabled = true;
 
-    wInputEvent(wAddressInput, submitBtn, formNotice);
+    addressInputEvent(wAddressInput, submitBtn, formNotice, form);
+    amountInputEvent(amountInput, submitBtn, formNotice, form);
     btnEvent(submitBtn, wAddressInput, amountInput, formNotice, formTitle);
 
     fieldSet.append(wAddressInput, amountInput);
