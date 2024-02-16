@@ -18,7 +18,7 @@ const buildComponent = (root: HTMLElement): void => {
         title.textContent = "Hold on!";
         title.className = "nowallet-title";
 
-        const subTitle: HTMLHeadElement = document.createElement("h3");
+        const subTitle: HTMLHeadElement = document.createElement("h2");
         subTitle.textContent =
             "Install and set up a browser wallet extension. Blockio recommends using MetaMask.";
         subTitle.className = "nowallet-subtitle";
