@@ -38,7 +38,6 @@ const buildComponent = (root: HTMLElement): void => {
             TransactionSender.buildComponent();
 
         root.append(balanceChecker, transactionSender);
-        chainChangeEvent();
     }
 };
 
@@ -48,4 +47,10 @@ const render = async () => {
     buildComponent(root);
 };
 
-document.addEventListener("DOMContentLoaded", render);
+document.addEventListener("DOMContentLoaded", () => {
+    render()
+        .then(chainChangeEvent)
+        .catch((error) =>
+            console.error("An error occurred during rendering:", error)
+        );
+});
