@@ -17,7 +17,8 @@
         "prettier": "^3.2.5",
         "typescript": "^5.2.2",
         "vite": "^5.1.0",
-        "vite-plugin-node-polyfills": "^0.21.0"
+        "vite-plugin-node-polyfills": "^0.21.0",
+        "vite-plugin-webfont-dl": "^3.9.1"
     },
     "dependencies": {
         "sass": "^1.70.0",

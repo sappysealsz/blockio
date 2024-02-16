@@ -1,8 +1,9 @@
 import { defineConfig } from "vite";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
+import webfontDownload from "vite-plugin-webfont-dl";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [nodePolyfills()],
+    plugins: [nodePolyfills(), webfontDownload()],
     base: "./",
+    mode: "production",
 });
