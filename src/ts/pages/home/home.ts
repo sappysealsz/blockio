@@ -48,4 +48,4 @@ const render = async () => {
     buildComponent(root);
 };
 
-render();
+document.addEventListener("DOMContentLoaded", render);
