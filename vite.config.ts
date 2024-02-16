@@ -6,4 +6,7 @@ export default defineConfig({
     plugins: [nodePolyfills(), webfontDownload()],
     base: "./",
     mode: "production",
+    build: {
+        minify: "terser",
+    },
 });
