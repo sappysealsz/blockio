@@ -23,15 +23,17 @@ const connectEvent = (li: HTMLLIElement): void => {
 
 // Self invoked IIFE to handle accountChange events
 ((): void => {
-    window.ethereum.on("accountsChanged", async (): Promise<void> => {
-        const header: HTMLElement | null = document.querySelector("header");
-        if (header) {
-            header.classList.add("fade-out");
-            await delay(200);
-            header.remove();
-            await render();
-        }
-    });
+    if (typeof window.ethereum != "undefined") {
+        window.ethereum.on("accountsChanged", async (): Promise<void> => {
+            const header: HTMLElement | null = document.querySelector("header");
+            if (header) {
+                header.classList.add("fade-out");
+                await delay(200);
+                header.remove();
+                await render();
+            }
+        });
+    }
 })();
 
 // Store network for selected address in localStorage
