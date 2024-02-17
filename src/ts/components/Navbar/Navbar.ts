@@ -21,8 +21,8 @@ const connectEvent = (li: HTMLLIElement): void => {
     });
 };
 
-// Self invoked to handle accountChange events
-const accountChangeEvent = ((): void => {
+// Self invoked IIFE to handle accountChange events
+((): void => {
     window.ethereum.on("accountsChanged", async (): Promise<void> => {
         const header: HTMLElement | null = document.querySelector("header");
         if (header) {
