@@ -47,18 +47,6 @@ const render = async () => {
     buildComponent(root);
 };
 
-// IIFE TO AVOID METAMASK BUG DISCUSSED HERE:
-// https://community.metamask.io/t/provider-not-getting-connected/27309/
-// https://community.metamask.io/t/provider-not-getting-connected/27309/10
-// (UGLY FIX) WILL BE REFACTORED AS SOON AS RELIABLE SOLUTION IS FOUND
-((): void => {
-    if (!sessionStorage.getItem("blockioReload")) {
-        // To reload once
-        sessionStorage.setItem("blockioReload", "true");
-        window.location.reload();
-    }
-})();
-
 render()
     .then(chainChangeEvent)
     .catch((error) =>
