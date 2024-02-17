@@ -47,10 +47,8 @@ const render = async () => {
     buildComponent(root);
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-    render()
-        .then(chainChangeEvent)
-        .catch((error) =>
-            console.error("An error occurred during rendering:", error)
-        );
-});
+render()
+    .then(chainChangeEvent)
+    .catch((error) =>
+        console.error("An error occurred during rendering:", error)
+    );
