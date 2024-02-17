@@ -148,7 +148,7 @@ const buildComponent = (): HTMLElement => {
 
     const amountInput: HTMLInputElement = document.createElement("input");
     amountInput.type = "number";
-    amountInput.placeholder = `Amount in ${localStorage.getItem("blockioCurrency")}`;
+    amountInput.placeholder = `Amount in ${localStorage.getItem("blockioCurrency") || "ETH"}`;
     amountInput.className = "amount-input";
     amountInput.step = "any";
     amountInput.required = true;
