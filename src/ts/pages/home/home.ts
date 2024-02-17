@@ -47,10 +47,20 @@ const render = async () => {
     buildComponent(root);
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-    render()
-        .then(chainChangeEvent)
-        .catch((error) =>
-            console.error("An error occurred during rendering:", error)
-        );
-});
+// IIFE TO AVOID METAMASK BUG DISCUSSED HERE:
+// https://community.metamask.io/t/provider-not-getting-connected/27309/
+// https://community.metamask.io/t/provider-not-getting-connected/27309/10
+// (UGLY FIX) WILL BE REFACTORED AS SOON AS RELIABLE SOLUTION IS FOUND
+https: ((): void => {
+    if (!sessionStorage.getItem("blockioReload")) {
+        // To reload once
+        sessionStorage.setItem("blockioReload", "true");
+        window.location.reload();
+    }
+})();
+
+render()
+    .then(chainChangeEvent)
+    .catch((error) =>
+        console.error("An error occurred during rendering:", error)
+    );
