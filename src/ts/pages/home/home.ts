@@ -51,7 +51,7 @@ const render = async () => {
 // https://community.metamask.io/t/provider-not-getting-connected/27309/
 // https://community.metamask.io/t/provider-not-getting-connected/27309/10
 // (UGLY FIX) WILL BE REFACTORED AS SOON AS RELIABLE SOLUTION IS FOUND
-https: ((): void => {
+((): void => {
     if (!sessionStorage.getItem("blockioReload")) {
         // To reload once
         sessionStorage.setItem("blockioReload", "true");
