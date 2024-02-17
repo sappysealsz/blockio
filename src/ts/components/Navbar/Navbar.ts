@@ -8,11 +8,33 @@ declare global {
         ethereum: any;
     }
 }
-const fetchCurrentBlock = async (account: string): Promise<number> => {
-    const agent: EthClient = new EthClient(window.ethereum, account);
-    return await agent.block();
+
+const delay = (ms: number): Promise<void> => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
+const connectEvent = (li: HTMLLIElement): void => {
+    li.addEventListener("click", async (): Promise<void> => {
+        await window.ethereum.request({
+            method: "eth_requestAccounts",
+        });
+    });
+};
+
+// Self invoked to handle accountChange events
+const accountChangeEvent = ((): void => {
+    window.ethereum.on("accountsChanged", async (): Promise<void> => {
+        const header: HTMLElement | null = document.querySelector("header");
+        if (header) {
+            header.classList.add("fade-out");
+            await delay(200);
+            header.remove();
+            await render();
+        }
+    });
+})();
+
+// Store network for selected address in localStorage
 const storeNetwork = async (account: string): Promise<void> => {
     async function getChainID(): Promise<number> {
         const chainID: number = await window.ethereum.request({
@@ -53,21 +75,20 @@ const anchorHandler = (account: string, anchor: HTMLAnchorElement): void => {
     });
 };
 
-const accountChangeEvent = (walletAddress: HTMLLIElement): void => {
-    window.ethereum.on("accountsChanged", (accounts: Array<string>) => {
-        walletAddress.textContent = accounts[0];
-    });
-};
-
 const homeLogoEvent = (logo: HTMLImageElement): void => {
     logo.addEventListener("click", () => {
         window.location.reload();
     });
 };
 
+const fetchCurrentBlock = async (account: string): Promise<number> => {
+    const agent: EthClient = new EthClient(window.ethereum, account);
+    return await agent.block();
+};
+
 const buildComponent = async (): Promise<HTMLElement> => {
     const headerContainer: HTMLElement = document.createElement("header");
-    headerContainer.className = "header";
+    headerContainer.classList.add("header", "fade-in");
 
     const logo: HTMLImageElement = document.createElement("img");
     logo.src = logoWhite;
@@ -80,30 +101,44 @@ const buildComponent = async (): Promise<HTMLElement> => {
     const ul: HTMLUListElement = document.createElement("ul");
 
     if (typeof window.ethereum != "undefined") {
-        const account: string = (
+        const account: string | null = (
             await window.ethereum.request({
-                method: "eth_requestAccounts",
+                method: "eth_accounts",
             })
         )[0];
-        await storeNetwork(account);
 
-        const li1: HTMLLIElement = document.createElement("li");
-        li1.textContent = account;
+        if (!account) {
+            // Connect Button
+            const li: HTMLLIElement = document.createElement("li");
+            const a: HTMLAnchorElement = document.createElement("a");
+            a.href = "#";
+            a.textContent = "Connect";
+            li.appendChild(a);
 
-        const li2: HTMLLIElement = document.createElement("li");
-        li2.textContent = localStorage.getItem("blockioNetwork");
+            connectEvent(li);
+            ul.appendChild(li);
+        } else {
+            await storeNetwork(account);
 
-        // Current Block Anchor
-        const li3: HTMLLIElement = document.createElement("li");
-        const a1: HTMLAnchorElement = document.createElement("a");
-        a1.href = "#";
-        a1.textContent = "What's the current block?";
+            // Selected Address Element
+            const li1: HTMLLIElement = document.createElement("li");
+            li1.textContent = account;
 
-        li3.appendChild(a1);
+            // Network Name Element
+            const li2: HTMLLIElement = document.createElement("li");
+            li2.textContent = localStorage.getItem("blockioNetwork");
 
-        accountChangeEvent(li1);
-        anchorHandler(account, a1);
-        ul.append(li1, li2, li3);
+            // Current Block Anchor
+            const li3: HTMLLIElement = document.createElement("li");
+            const a1: HTMLAnchorElement = document.createElement("a");
+            a1.href = "#";
+            a1.textContent = "What's the current block?";
+
+            li3.appendChild(a1);
+
+            anchorHandler(account, a1);
+            ul.append(li1, li2, li3);
+        }
     }
 
     navbar.append(ul);
@@ -124,11 +159,14 @@ const buildComponent = async (): Promise<HTMLElement> => {
         headerContainer.append(logo, navbar);
     }
 
+    void headerContainer.offsetWidth;
     return headerContainer;
 };
 
 const render = async (): Promise<void> => {
-    document.body.prepend(await buildComponent());
+    const header: HTMLElement = await buildComponent();
+    document.body.prepend(header);
+    setTimeout(() => header.classList.remove("fade-in"), 0);
 };
 
 export { render };
