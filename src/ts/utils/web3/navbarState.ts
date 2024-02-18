@@ -9,7 +9,7 @@ const connectEvent = (li: HTMLLIElement): void => {
 };
 
 const anchorHandler = (account: string, anchor: HTMLAnchorElement): void => {
-    anchor.addEventListener("click", async () => {
+    anchor.addEventListener("click", async (): Promise<void> => {
         const originalText: string = anchor.textContent!;
 
         try {
@@ -27,8 +27,8 @@ const resetAnchorText = (
     anchor: HTMLAnchorElement,
     originalText: string
 ): void => {
-    const RESET_TEXT_DELAY = 4000;
-    setTimeout(() => {
+    const RESET_TEXT_DELAY: number = 4000;
+    setTimeout((): void => {
         anchor.textContent = originalText;
     }, RESET_TEXT_DELAY);
 };
