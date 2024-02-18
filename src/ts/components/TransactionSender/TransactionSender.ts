@@ -2,6 +2,7 @@ import EthClient from "../../classes/EthClient/EthClient";
 import { TransactionResponse } from "../../classes/EthClient/types/transaction";
 import * as Fallback from "../Fallback/Fallback";
 import "../../../scss/transfer.scss";
+import { displayNotice } from "../../utils/DOM/displayNotice";
 
 declare global {
     interface Window {
@@ -9,16 +10,11 @@ declare global {
     }
 }
 
-const displayNotice = (notice: HTMLSpanElement, message: string) => {
-    notice.style.display = message ? "block" : "none";
-    notice.textContent = message;
-};
-
 const initTransaction = async (
     addressVal: string,
     account: string,
     amountVal: number
-) => {
+): Promise<TransactionResponse> => {
     const agent: EthClient = new EthClient(window.ethereum, account);
     return await agent.send(addressVal, amountVal);
 };
@@ -28,8 +24,8 @@ const addressInputEvent = (
     btn: HTMLButtonElement,
     notice: HTMLSpanElement,
     form: HTMLFormElement
-) => {
-    input.addEventListener("input", () => {
+): void => {
+    input.addEventListener("input", (): void => {
         if (input.checkValidity()) {
             if (form.checkValidity()) btn.disabled = false;
             displayNotice(notice, "");
@@ -45,8 +41,8 @@ const amountInputEvent = (
     btn: HTMLButtonElement,
     notice: HTMLSpanElement,
     form: HTMLFormElement
-) => {
-    input.addEventListener("input", () => {
+): void => {
+    input.addEventListener("input", (): void => {
         if (Number(input.value.trim()) > 0) {
             if (form.checkValidity()) btn.disabled = false;
             displayNotice(notice, "");
@@ -63,8 +59,8 @@ const btnEvent = (
     amountInput: HTMLInputElement,
     notice: HTMLSpanElement,
     title: HTMLHeadingElement
-) => {
-    btn.addEventListener("click", async () => {
+): void => {
+    btn.addEventListener("click", async (): Promise<void> => {
         displayNotice(notice, "");
         const addressVal: string = addressInput.value.trim();
         const amountVal: number = +amountInput.value.trim();
@@ -76,7 +72,10 @@ const btnEvent = (
                 })
             )[0];
 
-            const fallback = Fallback.buildComponent(title, 80);
+            const fallback: Record<string, Function> = Fallback.buildComponent(
+                title,
+                80
+            );
             const txRes: TransactionResponse = await initTransaction(
                 addressVal,
                 account,
@@ -101,7 +100,10 @@ const btnEvent = (
     });
 };
 
-const handleTransactionError = (notice: HTMLSpanElement, errorCode: number) => {
+const handleTransactionError = (
+    notice: HTMLSpanElement,
+    errorCode: number
+): void => {
     switch (errorCode) {
         case 4001:
             displayNotice(

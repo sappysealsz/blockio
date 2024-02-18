@@ -4,7 +4,7 @@ import * as Navbar from "../../components/Navbar/Navbar";
 import "../../../scss/nowallet.scss";
 import { storeNetwork } from "../../utils/web3/storeNetwork";
 
-const chainChangeEvent = () => {
+const chainChangeEvent = (): void => {
     window.ethereum.on("chainChanged", async (): Promise<void> => {
         await storeNetwork();
         window.location.reload();
@@ -43,7 +43,7 @@ const buildComponent = (root: HTMLElement): void => {
     }
 };
 
-const render = async () => {
+const render = async (): Promise<void> => {
     await Navbar.render();
     const root: HTMLElement = document.querySelector("#app")!;
     buildComponent(root);
@@ -51,6 +51,6 @@ const render = async () => {
 
 render()
     .then(chainChangeEvent)
-    .catch((error) =>
+    .catch((error: any) =>
         console.error("An error occurred during rendering:", error)
     );
