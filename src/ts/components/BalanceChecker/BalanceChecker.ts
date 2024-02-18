@@ -1,16 +1,21 @@
 import EthClient from "../../classes/EthClient/EthClient";
 import "../../../scss/balance.scss";
+
 declare global {
     interface Window {
         ethereum: any;
     }
 }
-const displayNotice = (notice: HTMLSpanElement, message: string) => {
+
+const displayNotice = (notice: HTMLSpanElement, message: string): void => {
     notice.style.display = message ? "block" : "none";
     notice.textContent = message;
 };
 
-const getBalance = async (inputVal: string, account: string) => {
+const getBalance = async (
+    inputVal: string,
+    account: string
+): Promise<number> => {
     const agent: EthClient = new EthClient(window.ethereum, account);
     return await agent.balance(inputVal, 4);
 };
@@ -19,8 +24,8 @@ const inputEvent = (
     input: HTMLInputElement,
     btn: HTMLButtonElement,
     notice: HTMLSpanElement
-) => {
-    input.addEventListener("input", () => {
+): void => {
+    input.addEventListener("input", (): void => {
         const wAddressRegex = /^0x/;
 
         if (wAddressRegex.test(input.value.trim())) {
@@ -37,8 +42,8 @@ const btnEvent = (
     btn: HTMLButtonElement,
     input: HTMLInputElement,
     notice: HTMLSpanElement
-) => {
-    btn.addEventListener("click", async () => {
+): void => {
+    btn.addEventListener("click", async (): Promise<void> => {
         const inputVal: string = input.value.trim();
 
         try {
@@ -47,12 +52,13 @@ const btnEvent = (
                     method: "eth_requestAccounts",
                 })
             )[0];
+
             const balance: number = await getBalance(inputVal, account);
             displayNotice(
                 notice,
                 `${balance} ${localStorage.getItem("blockioCurrency") || "ETH"}`
             );
-        } catch (err) {
+        } catch (err: any) {
             displayNotice(
                 notice,
                 "An error occurred while getting the balance"
