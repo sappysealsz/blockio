@@ -10,7 +10,7 @@ declare global {
 }
 
 const homeLogoEvent = (logo: HTMLImageElement): void => {
-    logo.addEventListener("click", () => {
+    logo.addEventListener("click", (): void => {
         window.location.replace(".");
     });
 };
@@ -69,7 +69,6 @@ const buildComponent = async (): Promise<HTMLElement> => {
 const render = async (): Promise<void> => {
     const header: HTMLElement = await buildComponent();
     document.body.prepend(header);
-    setTimeout(() => header.classList.remove("fade-in"), 0);
 };
 
 export { render };
