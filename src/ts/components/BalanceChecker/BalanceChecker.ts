@@ -1,16 +1,12 @@
 import EthClient from "../../classes/EthClient/EthClient";
 import "../../../scss/balance.scss";
+import { displayNotice } from "../../utils/DOM/displayNotice";
 
 declare global {
     interface Window {
         ethereum: any;
     }
 }
-
-const displayNotice = (notice: HTMLSpanElement, message: string): void => {
-    notice.style.display = message ? "block" : "none";
-    notice.textContent = message;
-};
 
 const getBalance = async (
     inputVal: string,
@@ -26,7 +22,7 @@ const inputEvent = (
     notice: HTMLSpanElement
 ): void => {
     input.addEventListener("input", (): void => {
-        const wAddressRegex = /^0x/;
+        const wAddressRegex: RegExp = /^0x/;
 
         if (wAddressRegex.test(input.value.trim())) {
             btn.disabled = false;
