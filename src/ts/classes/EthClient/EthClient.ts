@@ -1,4 +1,4 @@
-import Web3 from "web3";
+import Web3, { Transaction, TransactionReceipt } from "web3";
 import { TransactionResponse } from "./types/transaction";
 import { EtherUnit } from "./types/unit";
 import { Chain, Network } from "./types/chains";
@@ -28,7 +28,7 @@ class EthClient {
 
     async send(to: string, value: number): Promise<TransactionResponse> {
         try {
-            const transactionOpts = {
+            const transactionOpts: Transaction = {
                 from: this.account,
                 to,
                 value: this.provider.utils.toWei(value, this.ETHER),
@@ -37,7 +37,7 @@ class EthClient {
                 }),
             };
 
-            const res =
+            const res: TransactionReceipt =
                 await this.provider.eth.sendTransaction(transactionOpts);
 
             return {
