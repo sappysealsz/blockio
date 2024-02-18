@@ -117,13 +117,3 @@
         }
     }
 }
-
-.fade-out {
-    transition: opacity 0.2s;
-    opacity: 0;
-}
-
-.fade-in {
-    opacity: 0;
-    transition: opacity 0.2s;
-}
