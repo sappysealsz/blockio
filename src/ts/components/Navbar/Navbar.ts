@@ -33,8 +33,8 @@ const buildComponent = async (): Promise<HTMLElement> => {
         const accounts: Array<string> = await window.ethereum.request({
             method: "eth_accounts",
         });
-        await navbarState(ul, accounts);
         await storeNetwork();
+        await navbarState(ul, accounts);
 
         window.ethereum.on(
             "accountsChanged",
