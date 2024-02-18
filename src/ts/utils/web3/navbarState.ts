@@ -1,5 +1,4 @@
 import { fetchLatestBlock } from "./fetchLatestBlock";
-import { storeNetwork } from "./storeNetwork";
 
 const connectEvent = (li: HTMLLIElement): void => {
     li.addEventListener("click", async (): Promise<void> => {
