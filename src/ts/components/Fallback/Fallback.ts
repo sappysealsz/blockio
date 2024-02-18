@@ -1,6 +1,9 @@
 import fallback from "./fallback.svg";
 
-const buildComponent = (mountOn: HTMLElement, size: number) => {
+const buildComponent = (
+    mountOn: HTMLElement,
+    size: number
+): Record<string, Function> => {
     const fallbackEl: HTMLImageElement = document.createElement("img");
     fallbackEl.src = fallback;
     fallbackEl.alt = "Loading animation";
