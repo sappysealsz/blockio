@@ -2,9 +2,11 @@ import * as BalanceChecker from "../../components/BalanceChecker/BalanceChecker"
 import * as TransactionSender from "../../components/TransactionSender/TransactionSender";
 import * as Navbar from "../../components/Navbar/Navbar";
 import "../../../scss/nowallet.scss";
+import { storeNetwork } from "../../utils/web3/storeNetwork";
 
 const chainChangeEvent = () => {
-    window.ethereum.on("chainChanged", () => {
+    window.ethereum.on("chainChanged", async (): Promise<void> => {
+        await storeNetwork();
         window.location.reload();
     });
 };
