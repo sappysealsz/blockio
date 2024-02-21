@@ -1,18 +1,8 @@
-import EthClient from "../../classes/EthClient/EthClient";
 import "../../../scss/balance.scss";
 import { displayNotice } from "../../utils/DOM/displayNotice";
+import { agent } from "../../global/agent";
 
-declare global {
-    interface Window {
-        ethereum: any;
-    }
-}
-
-const getBalance = async (
-    inputVal: string,
-    account: string
-): Promise<number> => {
-    const agent: EthClient = new EthClient(window.ethereum, account);
+const getBalance = async (inputVal: string): Promise<number> => {
     return await agent.balance(inputVal, 4);
 };
 
@@ -43,13 +33,7 @@ const btnEvent = (
         const inputVal: string = input.value.trim();
 
         try {
-            const account: string = (
-                await window.ethereum.request({
-                    method: "eth_requestAccounts",
-                })
-            )[0];
-
-            const balance: number = await getBalance(inputVal, account);
+            const balance: number = await getBalance(inputVal);
             displayNotice(
                 notice,
                 `${balance} ${localStorage.getItem("blockioCurrency") || "ETH"}`

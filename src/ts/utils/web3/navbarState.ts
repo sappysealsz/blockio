@@ -1,19 +1,18 @@
+import { agent } from "../../global/agent";
 import { fetchLatestBlock } from "./fetchLatestBlock";
 
 const connectEvent = (li: HTMLLIElement): void => {
     li.addEventListener("click", async (): Promise<void> => {
-        await window.ethereum.request({
-            method: "eth_requestAccounts",
-        });
+        await agent.eth.requestAccounts();
     });
 };
 
-const anchorHandler = (account: string, anchor: HTMLAnchorElement): void => {
+const anchorHandler = (anchor: HTMLAnchorElement): void => {
     anchor.addEventListener("click", async (): Promise<void> => {
         const originalText: string = anchor.textContent!;
 
         try {
-            const cBlockNum: number = await fetchLatestBlock(account);
+            const cBlockNum: number = await fetchLatestBlock();
             anchor.textContent = `Block: ${cBlockNum}`;
 
             resetAnchorText(anchor, originalText);
@@ -68,7 +67,7 @@ export const navbarState = async (
 
         li3.appendChild(a1);
 
-        anchorHandler(account, a1);
+        anchorHandler(a1);
         ul.append(li1, li2, li3);
     }
 };

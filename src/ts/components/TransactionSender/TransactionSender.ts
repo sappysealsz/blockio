@@ -1,21 +1,13 @@
-import EthClient from "../../classes/EthClient/EthClient";
 import { TransactionResponse } from "../../classes/EthClient/types/transaction";
 import * as Fallback from "../Fallback/Fallback";
 import "../../../scss/transfer.scss";
 import { displayNotice } from "../../utils/DOM/displayNotice";
-
-declare global {
-    interface Window {
-        ethereum: any;
-    }
-}
+import { agent } from "../../global/agent";
 
 const initTransaction = async (
     addressVal: string,
-    account: string,
     amountVal: number
 ): Promise<TransactionResponse> => {
-    const agent: EthClient = new EthClient(window.ethereum, account);
     return await agent.send(addressVal, amountVal);
 };
 
@@ -66,19 +58,12 @@ const btnEvent = (
         const amountVal: number = +amountInput.value.trim();
 
         try {
-            const account: string = (
-                await window.ethereum.request({
-                    method: "eth_requestAccounts",
-                })
-            )[0];
-
             const fallback: Record<string, Function> = Fallback.buildComponent(
                 title,
                 80
             );
             const txRes: TransactionResponse = await initTransaction(
                 addressVal,
-                account,
                 amountVal
             );
             fallback.remove();

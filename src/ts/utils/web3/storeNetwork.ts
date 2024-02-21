@@ -1,16 +1,8 @@
-import EthClient from "../../classes/EthClient/EthClient";
-import { Network } from "../../classes/EthClient/types/chains";
+import { Network } from "../../classes/EthClient/types/network";
+import { agent } from "../../global/agent";
 
 export const storeNetwork = async (): Promise<void> => {
-    async function getChainID(): Promise<number> {
-        const chainID: number = await window.ethereum.request({
-            method: "net_version",
-        });
-        return chainID;
-    }
-
-    const agent: EthClient = new EthClient(window.ethereum, "NULL");
-    const networkData: Network = await agent.network(await getChainID());
+    const networkData: Network = await agent.network(await agent.chainID());
 
     localStorage.setItem("blockioNetwork", networkData.name);
     localStorage.setItem("blockioCurrency", networkData.currency);

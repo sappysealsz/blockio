@@ -2,12 +2,7 @@ import logoWhite from "./logoWhite.svg";
 import "../../../scss/navbar.scss";
 import { navbarState } from "../../utils/web3/navbarState";
 import { storeNetwork } from "../../utils/web3/storeNetwork";
-
-declare global {
-    interface Window {
-        ethereum: any;
-    }
-}
+import { agent } from "../../global/agent";
 
 const homeLogoEvent = (logo: HTMLImageElement): void => {
     logo.addEventListener("click", (): void => {
@@ -29,14 +24,12 @@ const buildComponent = async (): Promise<HTMLElement> => {
     const navbar: HTMLElement = document.createElement("nav");
     const ul: HTMLUListElement = document.createElement("ul");
 
-    if (typeof window.ethereum != "undefined") {
-        const accounts: Array<string> = await window.ethereum.request({
-            method: "eth_accounts",
-        });
+    if (typeof agent.provider != "undefined") {
+        const accounts: Array<string> = await agent.eth.getAccounts();
         await storeNetwork();
         await navbarState(ul, accounts);
 
-        window.ethereum.on(
+        agent.provider.on(
             "accountsChanged",
             async (accounts: Array<string>): Promise<void> => {
                 await navbarState(ul, accounts);

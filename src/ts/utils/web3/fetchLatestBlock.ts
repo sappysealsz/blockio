@@ -1,6 +1,5 @@
-import EthClient from "../../classes/EthClient/EthClient";
+import { agent } from "../../global/agent";
 
-export const fetchLatestBlock = async (account: string): Promise<number> => {
-    const agent: EthClient = new EthClient(window.ethereum, account);
+export const fetchLatestBlock = async (): Promise<number> => {
     return await agent.block();
 };

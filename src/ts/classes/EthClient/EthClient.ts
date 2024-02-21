@@ -1,47 +1,42 @@
 import Web3, { Transaction, TransactionReceipt } from "web3";
 import { TransactionResponse } from "./types/transaction";
 import { EtherUnit } from "./types/unit";
-import { Chain, Network } from "./types/chains";
+import { Chain } from "./types/chain";
+import { Network } from "./types/network";
 
-class EthClient {
-    private provider: Web3;
-    private readonly account: string;
+class EthClient extends Web3 {
     private readonly ETHER: EtherUnit = "ether";
 
-    constructor(web3Provider: Object, address: string) {
-        this.provider = new Web3(web3Provider);
-        this.account = address;
+    constructor(web3Provider: Object) {
+        super(web3Provider);
     }
 
     async balance(address: string, decimals: number): Promise<number> {
         return +Number(
-            this.provider.utils.fromWei(
-                await this.provider.eth.getBalance(address),
-                this.ETHER
-            )
+            this.utils.fromWei(await this.eth.getBalance(address), this.ETHER)
         ).toFixed(decimals);
     }
 
     async block(): Promise<number> {
-        return Number(await this.provider.eth.getBlockNumber());
+        return Number(await this.eth.getBlockNumber());
     }
 
     async send(to: string, value: number): Promise<TransactionResponse> {
         try {
             const transactionOpts: Transaction = {
-                from: this.account,
+                from: (await this.eth.requestAccounts())[0],
                 to,
-                value: this.provider.utils.toWei(value, this.ETHER),
-                gas: await this.provider.eth.estimateGas({
+                value: this.utils.toWei(value, this.ETHER),
+                gas: await this.eth.estimateGas({
                     to,
                 }),
             };
 
             const res: TransactionReceipt =
-                await this.provider.eth.sendTransaction(transactionOpts);
+                await this.eth.sendTransaction(transactionOpts);
 
             return {
-                hash: this.provider.utils.bytesToHex(res.transactionHash),
+                hash: this.utils.bytesToHex(res.transactionHash),
                 status: true,
             };
         } catch (err: any) {
@@ -69,6 +64,10 @@ class EthClient {
                 currency: "ETH",
             };
         }
+    }
+
+    async chainID(): Promise<number> {
+        return Number(await this.eth.getChainId());
     }
 }
 
