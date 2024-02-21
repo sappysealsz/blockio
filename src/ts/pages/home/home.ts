@@ -3,16 +3,17 @@ import * as TransactionSender from "../../components/TransactionSender/Transacti
 import * as Navbar from "../../components/Navbar/Navbar";
 import "../../../scss/nowallet.scss";
 import { storeNetwork } from "../../utils/web3/storeNetwork";
+import { agent } from "../../global/agent";
 
 const chainChangeEvent = (): void => {
-    window.ethereum.on("chainChanged", async (): Promise<void> => {
+    agent.provider?.on("chainChanged", async (): Promise<void> => {
         await storeNetwork();
         window.location.reload();
     });
 };
 
 const buildComponent = (root: HTMLElement): void => {
-    if (typeof window.ethereum === "undefined") {
+    if (typeof agent.provider === "undefined") {
         const noWalletCont: HTMLDivElement = document.createElement("div");
         noWalletCont.className = "nowallet-container";
 
