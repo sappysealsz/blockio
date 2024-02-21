@@ -50,5 +50,16 @@ Before you get started with Blockio, make sure you have the following prerequisi
     ```
 6. Open your browser and go to http://localhost:4173 to access Blockio.
 
+## 🧪 Unit Tests
+
+Blockio uses Vitest as its testing framework. To execute the existing tests, ensure that you have installed the required dev dependencies and then run the following command:
+
+```bash
+   npm test
+```
+
+#### Adding Tests
+If you wish to contribute or introduce new tests, locate the existing test files in the `tests` directory. Adhere to Vitest testing conventions and create your test files accordingly.
+
 ## ⚖️ License
 Blockio is licensed under the [MIT License](LICENSE). Feel free to reach out if you have any questions or suggestions.
