@@ -21,10 +21,18 @@ class EthClient extends Web3 {
         return Number(await this.eth.getBlockNumber());
     }
 
-    async send(to: string, value: number): Promise<TransactionResponse> {
+    async send(
+        to: string,
+        value: number,
+        isInjectedProvider: boolean = true
+    ): Promise<TransactionResponse> {
         try {
+            const account: string = isInjectedProvider
+                ? (await this.eth.requestAccounts())[0]
+                : (await this.eth.getAccounts())[0];
+
             const transactionOpts: Transaction = {
-                from: (await this.eth.requestAccounts())[0],
+                from: account,
                 to,
                 value: this.utils.toWei(value, this.ETHER),
                 gas: await this.eth.estimateGas({
