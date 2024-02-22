@@ -23,14 +23,14 @@ const buildComponent = (root: HTMLElement): void => {
 
         const subTitle: HTMLHeadElement = document.createElement("h2");
         subTitle.textContent =
-            "Install and set up a browser wallet extension. Blockio recommends using MetaMask.";
+            "Install and set up a browser wallet extension. Blockio recommends using Coinbase Wallet.";
         subTitle.className = "nowallet-subtitle";
 
         const anchor: HTMLAnchorElement = document.createElement("a");
         anchor.className = "no-wallet-link";
-        anchor.href = "https://metamask.io/download/";
+        anchor.href = "https://www.coinbase.com/wallet/downloads/";
         anchor.target = "_blank";
-        anchor.textContent = "Install MetaMask";
+        anchor.textContent = "Install Coinbase Wallet";
 
         noWalletCont.append(title, subTitle, anchor);
         root.appendChild(noWalletCont);
