@@ -114,7 +114,7 @@ describe("EthClient Class Methods", (): void => {
     test("Should return an unknown network object when .network() is called with an invalid network ID", async (): Promise<void> => {
         const network: Network = await testAgent.network(9999999);
 
-        expect(network.name).toEqual("Unknown");
+        expect(network.name).toEqual("Unknown Chain");
         expect(network.currency).toEqual("ETH");
     });
 
