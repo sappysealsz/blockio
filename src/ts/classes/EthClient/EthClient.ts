@@ -54,21 +54,18 @@ class EthClient extends Web3 {
 
     async network(id: number): Promise<Network> {
         try {
-            const chains: Chain[] = await (
-                await fetch("https://chainid.network/chains.json")
+            const chain: Chain = await (
+                await fetch(`https://chainid.network/chains/eip155-${id}.json`)
             ).json();
-            const networkData: Chain = chains.find(
-                (chain: Chain) => chain.chainId == id
-            )!;
 
             return {
-                name: networkData.name,
-                currency: networkData.nativeCurrency.symbol,
+                name: chain.name,
+                currency: chain.nativeCurrency.symbol,
             };
         } catch (err: any) {
             console.error("Error fetching current network data");
             return {
-                name: "Unknown",
+                name: "Unknown Chain",
                 currency: "ETH",
             };
         }
